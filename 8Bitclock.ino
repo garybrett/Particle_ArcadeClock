@@ -1,5 +1,5 @@
 // This #include statement was automatically added by the Particle IDE.
-#include "FastLED/FastLED.h"
+
 #include "LEDMatrix.h"
 #include "LEDText.h"
 #include "LEDSprites.h"
@@ -33,7 +33,7 @@ unsigned long xmasDate;
 unsigned long Now, dT;
 
 //target date for countdown
-byte targetYear = Time.year(); 
+byte targetYear = Time.year();
 byte targetMonth = 12;
 byte targetDay = 25;
 byte targetHour = 0;
@@ -145,14 +145,14 @@ void setup()
 //    FastLED.showColor(CRGB::White);
 //    delay(200);
     FastLED.show();
-  
+
     //text setup
     ScrollingMsg1.SetFont(RobotronFontData);
     WholeEvenChars = ((leds.Width() + (ScrollingMsg1.FontWidth() * 2) + 1) / ((ScrollingMsg1.FontWidth() + 1) * 2)) * ((ScrollingMsg1.FontWidth() + 1) * 2);
     ScrollingMsg1.Init(&leds, WholeEvenChars, ScrollingMsg1.FontHeight() + 2, (leds.Width() - WholeEvenChars) / 2, (leds.Height() - (ScrollingMsg1.FontHeight() + 2)) / 2);
     Particle.function("8BitMessage",receive8BitMessage);
-    
-    //sprite init 
+
+    //sprite init
     SprPacmanRight.SetPosition(-30,0);
     SprPacmanLeft.SetPosition(-30,0);
     SprBlinky.SetPosition(-30,0);
@@ -168,7 +168,7 @@ void setup()
     Sprites.AddSprite(&SprInvaderTwo);
     Sprites.AddSprite(&SprInvaderThree);
     Sprites.AddSprite(&SprTree);
-    
+
     //particle system setup
     source.vx = 3;
     source.vy = 1;
@@ -180,9 +180,9 @@ void setup()
     pSys.perCycle = 2;
     Time.zone(-8);
     renderer.reset(FastLED.leds());
-    
+
     //mp3 player setup
-    mp3Command("0x06 12 0");//set volume 
+    mp3Command("0x06 12 0");//set volume
     delay(50);
     mp3Command("0x16 0 0");//stop playback
     delay(50);
@@ -196,7 +196,7 @@ void loop()
     //https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299
     while(Serial1.available())
             Serial1.read();
-            
+
     //particle emitter sound reaction
     listenToAudio();
 
@@ -208,13 +208,13 @@ void loop()
     Sprites.UpdateSprites();
     Sprites.DetectCollisions();
     Sprites.RenderSprites();
-    
+
     //update the message if it has finished
     if (ScrollingMsg1.UpdateText() == -1)
     {
         SetNewMessage();
     }
-    
+
     FastLED.show();
     delay(10);
 }
@@ -265,7 +265,7 @@ void SetNewMessage()
             SprTree.SetPositionFrameMotionOptions(32/*X*/, 0/*Y*/, 0/*Frame*/, 8/*FrameRate*/, -1/*XChange*/, 4/*XRate*/, 0/*YChange*/, 0/*YRate*/, SPRITE_DETECT_EDGE | SPRITE_DETECT_COLLISION);
         break;
     }
-    
+
     //set common text parameters
     ScrollingMsg1.SetBackgroundMode(BACKGND_LEAVE|BACKGND_DIMMING);
     ScrollingMsg1.SetScrollDirection(SCROLL_LEFT);
@@ -284,7 +284,7 @@ void listenToAudio(){
     int maximum = 0;
     for(int i=0;i<50;i++)
     {
-        int value = analogRead(A0); 
+        int value = analogRead(A0);
         minimum = min(minimum, value);
         maximum = max(maximum, value);
     }
@@ -298,7 +298,7 @@ uint32_t msCmdReceived;
 //sends command to the mp3 player
 void sendCmd(int cmd, int lb, int hb, bool reply = false)
 {                 // standard format for module command stream
-    uint8_t buf[] = {0x7E, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xEF}; 
+    uint8_t buf[] = {0x7E, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xEF};
     int16_t chksum = 0;
     int idx = 3;                    // position of first command byte
 
@@ -309,7 +309,7 @@ void sendCmd(int cmd, int lb, int hb, bool reply = false)
     if (lb >= 0)                    // if there is a low byte data field
         buf[idx++] = (uint8_t)lb;   // add it to the buffer
     buf[2] = idx - 1;               // inject command length into buffer
-    
+
     for (int i=1; i < idx; i++)     // calculate check sum for the provided data
         chksum += buf[i];
     chksum *= -1;
@@ -319,7 +319,7 @@ void sendCmd(int cmd, int lb, int hb, bool reply = false)
     buf[idx++] = 0xEF;              // place end-of-command byte
 
     Serial1.write(buf, idx);        // send the command to module
-    for (int i = 0; i < idx; i++)   // send command as hex string to MCU 
+    for (int i = 0; i < idx; i++)   // send command as hex string to MCU
       Serial.printf("%02X ", buf[i]);
     Serial.println();
 }
@@ -327,7 +327,7 @@ void sendCmd(int cmd, int lb, int hb, bool reply = false)
 //formats the command to send to the mp3 player
 int mp3Command(String para)
 {
-    int cmd = -1;                   
+    int cmd = -1;
     int lb = -1;
     int hb = -1;
                                     // parse the command string
@@ -340,4 +340,3 @@ int mp3Command(String para)
 
     return cmd;                     // return what command we think we received
 }
-
