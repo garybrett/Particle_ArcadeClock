@@ -1,6 +1,6 @@
 #ifndef LEDSprites_h
 #define LEDSprites_h
-#include "FastLED/FastLED.h"
+
 #include "LEDMatrix.h"
 FASTLED_USING_NAMESPACE
 
