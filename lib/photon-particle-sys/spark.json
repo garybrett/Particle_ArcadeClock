@@ -1,0 +1,7 @@
+{
+  "name": "photon-particle-sys",
+  "author": "Gilad Dayagi (ported by dgjohnson)",
+  "license": "GNU",
+  "version": "0.0.50",
+  "description": "photon particle system for rgb matrix leveraging FastLED"
+}
