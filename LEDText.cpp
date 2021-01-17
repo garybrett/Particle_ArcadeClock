@@ -6,7 +6,7 @@ Written & tested on a Teensy 3.1 using Arduino V1.6.3 & teensyduino V1.22
 Even the basic examples need 12k rom & 4k ram 
 */
 
-#include "FastLED/FastLED.h"
+
 #include "LEDMatrix.h"
 #include <LEDText.h>
 FASTLED_USING_NAMESPACE

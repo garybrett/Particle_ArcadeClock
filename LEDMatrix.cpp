@@ -5,7 +5,7 @@ FastLED v3.1 library by Daniel Garcia and Mark Kriegsmann.
 Written & tested on a Teensy 3.1 using Arduino V1.6.3 & teensyduino V1.22
 */
 
-#include "FastLED/FastLED.h"
+
 #include <LEDMatrix.h>
 FASTLED_USING_NAMESPACE
 

@@ -1,5 +1,5 @@
 // This #include statement was automatically added by the Particle IDE.
-#include "FastLED/FastLED.h"
+
 #include "LEDMatrix.h"
 #include "LEDText.h"
 #include "LEDSprites.h"
@@ -33,7 +33,11 @@ unsigned long xmasDate;
 unsigned long Now, dT;
 
 //target date for countdown
+<<<<<<< HEAD
 byte targetYear = 2021;
+=======
+byte targetYear = Time.year();
+>>>>>>> e2f017d8c66dd3d53ce4ddb67923687f5b0c0fd0
 byte targetMonth = 12;
 byte targetDay = 25;
 byte targetHour = 0;

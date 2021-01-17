@@ -1,4 +1,4 @@
-#include "FastLED/FastLED.h"
+
 #include "LEDMatrix.h"
 FASTLED_USING_NAMESPACE;
 #ifndef LEDText_h
